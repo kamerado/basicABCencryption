@@ -1,13 +1,10 @@
 #!/usr/bin/env python3
 
-print('Be sure to open this program in the directory of the file you are working with '
-      '\notherwise include correct path of file')
 alphabet1 = 'abcdefghijklmnopqrstuvwxyz'
 alphabet2 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 my_file = ''
 encrypt = ''
 de = ''
-
 
 def encrypts(a, b, n):
     global encrypt
@@ -28,7 +25,6 @@ def encrypts(a, b, n):
     encrypted_file.write(encrypt)
     encrypted_file.close()
 
-
 def decrypt(c, d, n):
     global de
     decrypt_file = open(n, 'w')
@@ -48,35 +44,46 @@ def decrypt(c, d, n):
     decrypt_file.write(de)
     decrypt_file.close()
 
-
 while True:
+    print('Be sure to open this program in the directory of the file you are working with '
+          '\notherwise include correct path of file\n')
     INPUT = input('Type "E" to encrypt a file \n'
                   'Type "D" to decrypt a file \n'
                   'Type "X" to exit\n'
                   'Input: ')
     if INPUT.lower() == 'e':
-        file_name = input('\ninput file name to encrypt(include path): ')
-        my_key = input('input a number to use as key: ')
-        new_file = input('Enter a new file name: ')
-        my_key = int(my_key)
-        my_file = open(file_name, 'r')
-        content = my_file.readlines()
-        content = str(content)
-        print(content)
-        content = content[2:-2]
-        encrypts(content, my_key, new_file)
+        try:
+            file_name = input('\ninput file name to encrypt(include path): ')
+            my_key = input('input a number to use as key: ')
+            new_file = input('Enter a new file name: ')
+            my_key = int(my_key)
+            my_file = open(file_name, 'r')
+            content = my_file.readlines()
+            content = str(content)
+            print(content)
+            content = content[2:-2]
+            encrypts(content, my_key, new_file)
+        except Exception as err:
+            print('\n', err)
+
     elif INPUT.lower() == 'd':
-        file_name = input('\ninput file name to decrypt(include path)')
-        key = input('input a number for key: ')
-        new_file = input('Enter a new file name: ')
-        key = int(key)
-        file = open(file_name, 'r')
-        content = file.readlines()
-        content = str(content)
-        content = content[2:-2]
-        decrypt(content, key, new_file)
+        try:
+            file_name = input('\ninput file name to decrypt(include path)')
+            key = input('input a number for key: ')
+            new_file = input('Enter a new file name: ')
+            key = int(key)
+            file = open(file_name, 'r')
+            content = file.readlines()
+            content = str(content)
+            content = content[2:-2]
+            decrypt(content, key, new_file)
+        except Exception as err:
+            print('\n', err)
     elif INPUT.lower() == 'x':
         break
+    elif INPUT == '69':
+        print('nice...')
 
     else:
+        print('\nNot a valid input.')
         pass
